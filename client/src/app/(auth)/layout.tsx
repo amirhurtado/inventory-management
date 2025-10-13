@@ -15,7 +15,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         </Link>
       </div>
 
-      <div className="w-1/2 flex justify-center">{children}</div>
+      <div className="w-full md:w-1/2 flex justify-center">{children}</div>
 
       <Image
         src={"/sign-img.svg"}
