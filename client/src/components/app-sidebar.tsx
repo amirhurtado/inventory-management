@@ -24,7 +24,7 @@ export function AppSidebar() {
         <Image src="/logo.png" width={50} height={50} alt="logo" />
       </SidebarHeader>
       <SidebarContent>
-        <div className="flex flex-col justify-between h-screen">
+        <div className="flex flex-col justify-between h-dvh">
           <SidebarGroup>
             <SidebarGroupLabel className="uppercase mt-2">
               <h2>Principal</h2>
@@ -60,7 +60,7 @@ export function AppSidebar() {
 
             <div className="pl-4 mt-2" >
 
-            <UserButton />
+            <UserButton showUserInfo/>
 
 
             </div>
