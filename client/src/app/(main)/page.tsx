@@ -1,8 +1,9 @@
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div className="">
-      <p>Hola</p>
-    </div>
-  );
+
+  redirect('/sign-in');
+
+
+  return null;
 }
