@@ -12,7 +12,7 @@ const TopBar = () => {
         href={"https://github.com/amirhurtado"}
         className="border-1 gap-2 border-gray-300 dark:border-gray-700 rounded-lg flex justify-center items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all ease-in "
       >
-        <p className="text-sm md:hidden">Amir Hurtado</p>
+        <p className="text-sm hidden md:block">Amir Hurtado</p>
         <Github strokeWidth={1} size={19.5} />
       </Link>
     </div>
