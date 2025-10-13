@@ -1,7 +1,7 @@
-import { ModeToggle } from "@/components/theme/ModeToggle";
-import { Github } from "lucide-react";
+import TopBar from "@/components/TopBar";
+
 import Image from "next/image";
-import Link from "next/link";
+
 import React from "react";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
@@ -12,33 +12,23 @@ const layout = ({ children }: { children: React.ReactNode }) => {
           <Image src={"/logo.png"} alt="logo" width={90} height={90} />
         </div>
 
-        <div className="flex gap-2">
-          <ModeToggle />
-
-          <Link
-            href={"https://github.com/amirhurtado"}
-            className="border-1 gap-2 border-gray-300 dark:border-gray-700 rounded-lg flex justify-center items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all ease-in "
-          >
-            <p className="text-sm">Amir Hurtado</p>
-            <Github strokeWidth={1} size={19.5} />
-          </Link>
-        </div>
+        <TopBar />
       </div>
 
       <div className="flex justify-between ">
-        <div className="w-full md:w-1/2 flex items-center justify-center ">{children}</div>
+        <div className="w-full md:w-1/2 flex items-center justify-center ">
+          {children}
+        </div>
 
         <div className="w-1/2 hidden md:flex  justify-center ">
           <Image
-          src={"/sign-img.svg"}
-          alt="sign-img"
-          width={400}
-          height={300}
-          className="object-cover w-1/2 "
-        />
-
+            src={"/sign-img.svg"}
+            alt="sign-img"
+            width={400}
+            height={300}
+            className="object-cover w-1/2 "
+          />
         </div>
-        
       </div>
     </div>
   );
