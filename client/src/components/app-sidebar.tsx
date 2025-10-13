@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Sidebar,
   SidebarContent,
@@ -10,8 +12,11 @@ import {
 import { navBar } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar() {
+  const pathname = usePathname();
+
   return (
     <Sidebar>
       <SidebarHeader className="mt-2 md:mt-4">
@@ -23,15 +28,23 @@ export function AppSidebar() {
             <h2>Principal</h2>
           </SidebarGroupLabel>
 
-          <SidebarGroupContent className="flex flex-col gap-2 pl-2 mt-2  ">
+          <SidebarGroupContent className="flex flex-col gap-2 pl-2 mt-2">
             {navBar.map((item, i) => {
               const Icon = item.icon;
+              const isActive = pathname === item.href;
+
               return (
-                <Link href={item.href} key={i} className="flex gap-4 px-2 py-3 transition-colors hover:bg-accent rounded-lg">
+                <Link
+                  href={item.href}
+                  key={i}
+                  className={`flex gap-4 px-2 py-3 transition-colors rounded-lg ${
+                    isActive
+                      ? "bg-primary text-white  "
+                      : "hover:bg-accent text-gray-800 dark:text-gray-300"
+                  }`}
+                >
                   <Icon strokeWidth={1} size={22} />
-                  <p className="text-md text-gray-800 dark:text-gray-300">
-                    {item.name}
-                  </p>
+                  <p className="text-md">{item.name}</p>
                 </Link>
               );
             })}
