@@ -9,7 +9,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     <div className="h-dvh w-screen flex flex-col  p-2 md:p-8 relative">
       <div className=" w-full flex   justify-between   items-start">
         <div>
-          <Image src={"/logo.png"} alt="logo" width={90} height={90} />
+          <Image src={"/logo.png"} alt="logo" width={80} height={80} />
         </div>
 
         <TopBar />

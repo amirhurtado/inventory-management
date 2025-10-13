@@ -12,7 +12,7 @@ export function AppSidebar() {
     <Sidebar >
       <SidebarHeader className="mt-2 md:mt-4" >
 
-        <Image src="/logo.png" width={60} height={60} alt="logo" />
+        <Image src="/logo.png" width={50} height={50} alt="logo" />
         </SidebarHeader>
       <SidebarContent>
         <SidebarGroup />
