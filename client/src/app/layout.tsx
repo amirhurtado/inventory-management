@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import { stackClientApp } from "../stack/client";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat, Lora  } from "next/font/google";
 import "./globals.css";
+
 import { ThemeProvider } from "@/components/theme/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const monserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
 });
 
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${monserrat.variable} ${lora.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -36,7 +37,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <StackProvider app={stackClientApp}>
+          <StackProvider app={stackClientApp} lang="es-419">
             <StackTheme>{children}</StackTheme>
           </StackProvider>
         </ThemeProvider>
