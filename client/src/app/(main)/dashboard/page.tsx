@@ -1,7 +1,7 @@
 import {
+  getDashboardProductAction,
   getLowStockAction,
   getRecentProductsAction,
-  getTotalProductsAction,
 } from "@/actions/products/getProduct";
 import { getCurrentUser } from "@/lib/auth";
 import React from "react";
@@ -10,18 +10,22 @@ const DashboardPage = async () => {
   const user = await getCurrentUser();
   const userId = user.id;
 
-  const [responseCountTotalProducts, responseLowStock, responseRecentProducts] =
+  const [responseGetProducts, responseLowStock, responseRecentProducts] =
     await Promise.all([
-      getTotalProductsAction(userId),
+      getDashboardProductAction(userId),
       getLowStockAction(userId),
       getRecentProductsAction(userId),
     ]);
 
   console.log(
-    responseCountTotalProducts.countProducts,
+    responseGetProducts.products,
     responseLowStock.lowStock,
     responseRecentProducts.recentProducts
   );
+
+  const totalPrice = responseGetProducts.products?.reduce((total, product) => total + (Number(product.price) * product.quantity), 0)
+
+  console.log(totalPrice)
 
   return (
     <div className="flex max-h-svh overflow-y-auto">
