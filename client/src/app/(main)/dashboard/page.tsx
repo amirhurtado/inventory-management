@@ -1,6 +1,13 @@
+import { getTotalProductsAction } from '@/actions/products/getProduct'
 import React from 'react'
 
-const DashboardPage = () => {
+const DashboardPage = async () => {
+
+  const [countTotalProducts] = await Promise.all([getTotalProductsAction()]);
+
+  console.log(countTotalProducts)
+
+
   return (
     <div className='flex max-h-svh overflow-y-auto'>
 
