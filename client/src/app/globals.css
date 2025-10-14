@@ -5,7 +5,7 @@
 
 @theme inline {
   --font-montserrat: var(--font-montserrat);
-  --font-lora: var(--font-lora);
+  --font-poppins: var(--font-poppins);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);

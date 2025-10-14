@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { StackProvider, StackTheme } from "@stackframe/stack";
 import { stackClientApp } from "../stack/client";
-import { Montserrat, Lora  } from "next/font/google";
+import { Montserrat, Poppins  } from "next/font/google";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/theme/theme-provider";
@@ -11,9 +11,10 @@ const monserrat = Montserrat({
   subsets: ["latin"],
 });
 
-const lora = Lora({
-  variable: "--font-lora",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
+  weight: "300"
 });
 
 export const metadata: Metadata = {
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${monserrat.variable} ${lora.variable} antialiased`}
+        className={`${monserrat.variable} ${poppins.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

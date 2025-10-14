@@ -53,12 +53,12 @@ export function AppSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col pl-2">
             <SidebarGroupLabel className="uppercase mt-2">
               <h2>Mi perfil</h2>
             </SidebarGroupLabel>
 
-            <div className="pl-4 mt-2" >
+            <div className="pl-2 mt-2" >
 
             <UserButton showUserInfo/>
 
