@@ -19,23 +19,26 @@ const DashboardPage = async () => {
       getRecentProductsAction(userId),
     ]);
 
-  console.log(
-    responseGetProducts.products,
-    responseLowStock.lowStock,
-    responseRecentProducts.recentProducts
-  );
+ 
+    if(!responseGetProducts.success || !responseLowStock.success || !responseRecentProducts.success){
+      return <p>Error inesperado</p>
+    }
 
   const totalPrice = responseGetProducts.products?.reduce(
     (total, product) => total + Number(product.price) * product.quantity,
     0
   );
 
-  console.log(totalPrice);
 
   return (
     <div className="flex flex-col  gap-4 md:gap-8 max-h-svh w-full overflow-y-auto ">
       <HeaderDashBoard />
-      <SectionsDashboard />
+      <SectionsDashboard dataSections={{
+        totalProducts: responseGetProducts.products!.length,
+        totalPrice: totalPrice!,
+        lowStock: responseLowStock.lowStock!.length
+
+      }}/>
     </div>
   );
 };
