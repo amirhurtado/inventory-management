@@ -2,15 +2,53 @@
 
 import prisma from "@/lib/prisma";
 
-export const getTotalProductsAction = async () => {
-    try {
+export const getTotalProductsAction = async (userId: string) => {
+  try {
+    const countProducts = await prisma.product.count({
+      where: {
+        userId,
+      },
+    });
 
-        const countProducts = await prisma.product.count();
+    
+
+    return { success: true, countProducts };
+  } catch {
+    return { success: false };
+  }
+};
+
+export const getLowStockAction = async (userId: string) => {
+  try {
+    const lowStock = await prisma.product.findMany({
+      where: {
+        userId,
+      },
+    });
+
+    return { success: true, lowStock };
+  } catch {
+    return { success: false };
+  }
+};
 
 
-        return countProducts
+export const getRecentProductsAction = async (userId: string) => {
+    try{
+        const recentProducts = await prisma.product.findMany({
+            where: {
+                userId,
+            },
+            take: 5,
+            orderBy: {
+                createdAt: "desc"
+            }
+        })
 
-    } catch {
-        throw new Error("Error al obtener productos");
+        return { success: true, recentProducts}
+
+    }catch{
+        return { success: false };
+
     }
 }
