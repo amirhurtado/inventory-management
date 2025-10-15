@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { StackProvider, StackTheme } from "@stackframe/stack";
-import { stackClientApp } from "../stack/client";
+
 import { Montserrat, Poppins  } from "next/font/google";
 import "./globals.css";
 
-import { ThemeProvider } from "@/components/theme/theme-provider";
+import Providers from "@/providers";
+
+
 
 const monserrat = Montserrat({
   variable: "--font-montserrat",
@@ -32,17 +33,14 @@ export default function RootLayout({
       <body
         className={`${monserrat.variable} ${poppins.variable} antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <StackProvider app={stackClientApp} lang="es-419">
-            <StackTheme>{children}</StackTheme>
-          </StackProvider>
-        </ThemeProvider>
+        <Providers >
+        {children}
+        </Providers >
       </body>
     </html>
   );
 }
+
+
+
+
