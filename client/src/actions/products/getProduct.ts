@@ -45,3 +45,24 @@ export const getRecentProductsAction = async (userId: string) => {
     return { success: false };
   }
 };
+
+
+
+
+export const getInventoryProductsAction = async (userId: string) => {
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return { success: true, products };
+  } catch (error) {
+    console.error(error);
+    return { success: false, error: "No se pudieron obtener los productos." };
+  }
+};
