@@ -19,7 +19,7 @@ const DashboardPage = async () => {
 
  
     if(!responseGetProducts.success  || !responseRecentProducts.success){
-      return <p>Error inesperado</p>
+      throw new Error( "No se pudieron cargar los productos.");
     }
 
   
