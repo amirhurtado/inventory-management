@@ -1,15 +1,42 @@
-import React from 'react'
+import React from "react";
 
-const StockLevels = () => {
+interface StockLevelsInterface {
+  products: {
+    name: string;
+    quantity: number;
+    isLowStock: boolean;
+  }[];
+}
+
+const StockLevels = ({ products }: StockLevelsInterface) => {
   return (
-    <div className='border-1 rounded-lg px-3 py-6  flex flex-col flex-1 '>
+    <div className="border-1 flex flex-col flex-1  max-h-[30rem]   md:max-h-dvh overflow-y-auto  rounded-lg px-3 py-6   gap-5  ">
+      <h2 className="">Niveles de existencias </h2>
 
-      <h2 className=''>Niveles de existencias </h2>
+      <div className="flex flex-col gap-3 w-full ">
+        {products.map((product, index) => (
+          <div
+            className="w-full flex justify-between font-poppins  p-3 bg-accent rounded-lg "
+            key={index}
+          >
+            <div>
+              <p className="text-sm md:text-md">{product.name}</p>
+            </div>
+
+            <p className="text-xs md:text-md">
+              {product.quantity}{" "}
+              {product.quantity === 1 ? "Unidad" : "Unidades"}
+            </p>
+          </div>
+        ))}
 
 
       
-    </div>
-  )
-}
 
-export default StockLevels
+  
+      </div>
+    </div>
+  );
+};
+
+export default StockLevels;

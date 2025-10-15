@@ -14,7 +14,7 @@ const KeyParameters = ({data} : KeyParametersInterface) => {
     <div className='border-1 rounded-lg px-3 py-6  flex flex-col gap-6 md:gap-8'>
         
       <h2 className=''>Parámetros clave </h2>
-      <div className='grid grid-cols-3'>
+      <div className='grid grid-cols-1 md:grid-cols-3 '>
 
         <div className='flex items-center flex-col gap-3 bg-accent p-4 rounded-lg'>
             <h3 className='font-poppins text-2xl font-bold '>{data.totalProducts}</h3>
