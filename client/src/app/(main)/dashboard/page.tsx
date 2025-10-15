@@ -31,7 +31,7 @@ const DashboardPage = async () => {
 
 
   return (
-    <div className="flex flex-col  gap-4 md:gap-8 max-h-svh w-full overflow-y-auto ">
+    <div className="flex flex-col  gap-4 md:gap-8 max-h-svh w-full overflow-y-auto p-2 ">
       <HeaderDashBoard />
       <SectionsDashboard dataSections={{
         totalProducts: responseGetProducts.products!.length,
