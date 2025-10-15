@@ -2,7 +2,7 @@
 
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { StackProvider, StackTheme } from "@stackframe/stack";
-import { stackClientApp } from "./stack/client"; 
+import { stackClientApp } from "@/stack/client"; 
 
 import React, { useState } from 'react';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
