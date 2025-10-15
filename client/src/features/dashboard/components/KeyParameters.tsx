@@ -1,4 +1,4 @@
-import { HandCoins, SquareKanban, SquareSigma } from 'lucide-react'
+import { DollarSign, HandCoins, SquareKanban } from 'lucide-react'
 import React from 'react'
 
 interface KeyParametersInterface {
@@ -23,10 +23,10 @@ const KeyParameters = ({data} : KeyParametersInterface) => {
         </div>
 
 
-         <div className='flex items-center flex-col gap-3'>
+         <div className='flex items-center flex-col gap-3 p-4'>
             <h3 className='font-poppins text-2xl font-bold'>${data.totalPrice.toFixed(2)}</h3>
             <p className='text-xs text-gray-600 dark:text-gray-400'>Valor total</p>
-            <SquareSigma />
+            <DollarSign />
         </div>
 
 
