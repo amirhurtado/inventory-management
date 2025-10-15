@@ -4,6 +4,7 @@ import StockLevels from "./StockLevels";
 
 import { productsDashboardType } from "@/types";
 import NewProductsGraph from "./NewProductsGraph";
+import StockPieChart from "./StockPieChart";
 
 interface SectionsDashboardInterface {
   dataSections: {
@@ -46,6 +47,20 @@ const dataGraphNewProducts = Object.entries(productsByDate).map(([date, count]) 
 })).slice(0, 5);;
 
 
+const dataStockPie =
+  dataSections?.products
+    ?.filter((p) => typeof p.quantity === "number" && !!p.name)
+    .sort((a, b) => b.quantity - a.quantity)
+    .slice(0, 6)
+    .map((product) => ({
+      name: product.name as string,
+      value: Number(product.quantity),
+    })) || [];
+
+
+
+
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 flex-1  overflow-y-scroll md:max-h-dvh md:overflow-hidden    w-full gap-4 ">
       <div className="flex flex-col gap-4 md:max-h-dvh md:overflow-hidden">
@@ -64,9 +79,7 @@ const dataGraphNewProducts = Object.entries(productsByDate).map(([date, count]) 
 
      <div className="flex flex-col gap-4  md:max-h-dvh md:overflow-hidden ">
       <NewProductsGraph dataGraphNewProducts={dataGraphNewProducts} />
-      <div className="flex flex-col h-1/2 border-1 rounded-lg">
-        <p>tabla</p>
-      </div>
+      <StockPieChart data={dataStockPie} />
 
      </div>
     </div>

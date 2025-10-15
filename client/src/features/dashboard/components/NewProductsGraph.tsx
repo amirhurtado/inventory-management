@@ -16,7 +16,7 @@ interface NewProductsGraphProps {
 
 const NewProductsGraph = ({ dataGraphNewProducts }: NewProductsGraphProps) => {
   return (
-    <div className="border h-1/2 rounded-2xl px-3 py-6 flex flex-col gap-6 md:gap-8 shadow-sm">
+    <div className="border-1 h-[350px] md:h-1/2 rounded-2xl px-3 py-6 flex flex-col gap-6 md:gap-8 shadow-sm">
       <h2 className="text-lg font-semibold">Nuevos productos por día</h2>
 
       <div className="h-full w-full">
