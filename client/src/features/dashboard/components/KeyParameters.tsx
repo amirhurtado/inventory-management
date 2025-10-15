@@ -11,7 +11,7 @@ interface KeyParametersInterface {
 
 const KeyParameters = ({data} : KeyParametersInterface) => {
   return (
-    <div className='border-1 rounded-lg px-3 py-6  h-1/2 flex flex-col gap-6 md:gap-8'>
+    <div className='border-1 rounded-lg px-3 py-6  flex flex-col gap-6 md:gap-8'>
         
       <h2 className=''>Parámetros clave </h2>
       <div className='grid grid-cols-3'>

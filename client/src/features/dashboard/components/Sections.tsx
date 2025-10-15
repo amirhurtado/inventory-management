@@ -1,38 +1,42 @@
-import React from 'react'
-import KeyParameters from './KeyParameters'
+import React from "react";
+import KeyParameters from "./KeyParameters";
+import StockLevels from "./StockLevels";
+
+import { productsDashboardType } from "@/types";
 
 interface SectionsDashboardInterface {
-  dataSections : {
-    totalProducts: number,
-    totalPrice: number,
-    lowStock: number
-  }
+  dataSections: {
+    products: productsDashboardType;
+  };
 }
 
-const SectionsDashboard = ({dataSections}: SectionsDashboardInterface) => {
+const SectionsDashboard = ({ dataSections }: SectionsDashboardInterface) => {
+  const totalPrice = dataSections.products.reduce(
+    (total, product) => total + Number(product.price) * product.quantity,
+    0
+  );
+
+  const lowStockCount = dataSections.products.filter(
+    (product) => product.lowStockAt === product.quantity
+  ).length;
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 h-full w-full gap-4">
+      <div className="flex flex-col gap-4">
+        <KeyParameters
+          data={{
+            totalProducts: dataSections.products.length,
+            totalPrice: totalPrice,
+            lowStock: lowStockCount,
+          }}
+        />
 
-
-      <div className='flex flex-col gap-4'>
-
-        <KeyParameters data={{
-          totalProducts: dataSections.totalProducts,
-          totalPrice: dataSections.totalPrice,
-          lowStock: dataSections.lowStock
-        }} />
-
-        <div className='flex h-1/2 border-4'>
-          Tabla
-        </div>
-
-
+        <StockLevels />
       </div>
 
-        <h2 className="">Hola</h2>
-    
-      </div>
-  )
-}
+      <h2 className="">Hola</h2>
+    </div>
+  );
+};
 
-export default SectionsDashboard
+export default SectionsDashboard;

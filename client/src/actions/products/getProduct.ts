@@ -9,7 +9,9 @@ export const getDashboardProductAction = async (userId: string) => {
         userId,
       },
       select: {
+        name: true,
         price: true,
+        lowStockAt: true,
         quantity: true,
         createdAt: true,
       },
@@ -21,22 +23,7 @@ export const getDashboardProductAction = async (userId: string) => {
   }
 };
 
-export const getLowStockAction = async (userId: string) => {
-  try {
-    const lowStock = await prisma.product.findMany({
-      where: {
-        userId,
-        lowStockAt: {not : null},
-      },
-    });
 
-    const lowStockFilter = lowStock.filter((product) => product.quantity <= product.lowStockAt!)
-
-    return { success: true, lowStock: lowStockFilter };
-  } catch {
-    return { success: false };
-  }
-};
 
 export const getRecentProductsAction = async (userId: string) => {
   try {
