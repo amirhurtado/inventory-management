@@ -15,6 +15,9 @@ export const getDashboardProductAction = async (userId: string) => {
         quantity: true,
         createdAt: true,
       },
+      orderBy: {
+        createdAt: "desc"
+      }
     });
 
     return { success: true, products };

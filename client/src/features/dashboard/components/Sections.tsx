@@ -3,6 +3,7 @@ import KeyParameters from "./KeyParameters";
 import StockLevels from "./StockLevels";
 
 import { productsDashboardType } from "@/types";
+import NewProductsGraph from "./NewProductsGraph";
 
 interface SectionsDashboardInterface {
   dataSections: {
@@ -27,8 +28,26 @@ const SectionsDashboard = ({ dataSections }: SectionsDashboardInterface) => {
       : false,
   }));
 
+  const productsByDate = dataSections.products.reduce((acc, product) => {
+  const date = new Date(product.createdAt).toLocaleDateString("es-CO", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
+  acc[date] = (acc[date] || 0) + 1;
+
+  return acc;
+}, {} as Record<string, number>);
+
+const dataGraphNewProducts = Object.entries(productsByDate).map(([date, count]) => ({
+  date,
+  count,
+})).slice(0, 5);;
+
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2  overflow-y-scroll md:max-h-dvh md:overflow-hidden    w-full gap-4  ">
+    <div className="grid grid-cols-1 lg:grid-cols-2 flex-1  overflow-y-scroll md:max-h-dvh md:overflow-hidden    w-full gap-4 ">
       <div className="flex flex-col gap-4 md:max-h-dvh md:overflow-hidden">
         <KeyParameters
           data={{
@@ -41,7 +60,15 @@ const SectionsDashboard = ({ dataSections }: SectionsDashboardInterface) => {
         <StockLevels products={dataStockLevels} />
       </div>
 
-      <h2 className="">Hola</h2>
+
+
+     <div className="flex flex-col gap-4  md:max-h-dvh md:overflow-hidden ">
+      <NewProductsGraph dataGraphNewProducts={dataGraphNewProducts} />
+      <div className="flex flex-col h-1/2 border-1 rounded-lg">
+        <p>tabla</p>
+      </div>
+
+     </div>
     </div>
   );
 };
