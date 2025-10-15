@@ -34,23 +34,23 @@ const AddProductForm = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="flex flex-col gap-2">
           <label htmlFor="name" className="text-xs font-medium">Nombre del producto</label>
-          <Input id="name" name="name" placeholder="Ej: Teclado mecánico" required minLength={3} />
+          <Input id="name" name="name" placeholder="Ej: Teclado mecánico" className="placeholder:text-sm md:placeholder:text-md" required minLength={3} />
         </div>
         <div className="flex flex-col gap-2">
            <label htmlFor="sku" className="text-xs font-medium">SKU (Opcional)</label>
-          <Input id="sku" name="sku" placeholder="Ej: PROD-015" />
+          <Input id="sku" name="sku" className="placeholder:text-sm md:placeholder:text-md" placeholder="Ej: PROD-015" />
         </div>
         <div className="flex flex-col gap-2">
            <label htmlFor="price" className="text-xs font-medium">Precio</label>
-          <Input id="price" name="price" type="number" step="0.01" placeholder="0.00" required />
+          <Input id="price" name="price" className="placeholder:text-sm md:placeholder:text-md" type="number" step="0.01" placeholder="0.00" required />
         </div>
         <div className="flex flex-col gap-2">
            <label htmlFor="quantity" className="text-xs font-medium">Cantidad</label>
-          <Input id="quantity" name="quantity" type="number" placeholder="0" required />
+          <Input id="quantity" name="quantity" className="placeholder:text-sm md:placeholder:text-md" type="number" placeholder="0" required />
         </div>
         <div className="flex flex-col gap-2 md:col-span-2">
            <label htmlFor="lowStockAt" className="text-xs font-medium">Notificar inventario bajo en (Opcional)</label>
-          <Input id="lowStockAt" name="lowStockAt" type="number" placeholder="Ej: 5" />
+          <Input id="lowStockAt" name="lowStockAt" className="placeholder:text-sm md:placeholder:text-md" type="number" placeholder="Ej: 5" />
         </div>
       </div>
 
