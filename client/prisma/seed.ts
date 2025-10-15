@@ -16,7 +16,7 @@ const productData: Prisma.ProductCreateInput[] = [
     name: "Mouse inalámbrico",
     sku: "PROD-002",
     price: new Prisma.Decimal(129.99),
-    quantity: 25,
+    quantity: 5,
     lowStockAt: 5,
     userId:   "7ab1dd1d-b65c-411b-a3ce-b3d25891bbcc" 
   },

@@ -26,10 +26,13 @@ export const getLowStockAction = async (userId: string) => {
     const lowStock = await prisma.product.findMany({
       where: {
         userId,
+        lowStockAt: {not : null},
       },
     });
 
-    return { success: true, lowStock };
+    const lowStockFilter = lowStock.filter((product) => product.quantity <= product.lowStockAt!)
+
+    return { success: true, lowStock: lowStockFilter };
   } catch {
     return { success: false };
   }
