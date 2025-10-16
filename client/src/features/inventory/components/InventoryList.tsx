@@ -1,18 +1,19 @@
 "use client";
 
-import { deleteProductAction } from "@/actions/products/deleteProduct";
 import { getInventoryProductsAction } from "@/actions/products/getProduct";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Terminal } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 import { InventorySkeleton } from "./InventorySkeleton";
 import { ProductCard } from "./ProductCard";
-import { toast } from "sonner"; 
+import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
+import { useDeleteProduct } from "./hooks/useDeleteProduct"; 
+import { EditProductSheet } from "./EditProductSheet";
 import { Product } from "@/types";
+
 
 
 interface InventoryListProps {
@@ -20,8 +21,9 @@ interface InventoryListProps {
 }
 
 const InventoryList = ({ initialProducts }: InventoryListProps) => {
-  const queryClient = useQueryClient();
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
+  const [productToEdit, setProductToEdit] = useState<Product | null>(null);
+  const queryClient = useQueryClient();
 
   const { data: products, isLoading, isError, error: queryError } = useQuery({
     queryKey: ["inventoryProducts"],
@@ -29,35 +31,18 @@ const InventoryList = ({ initialProducts }: InventoryListProps) => {
     initialData: initialProducts,
   });
 
-  const { mutate: deleteProduct, isPending: isDeleting } = useMutation({
-    mutationFn: deleteProductAction,
-    onSuccess: (data) => {
-      setProductToDelete(null);
-      if (data.success) {
-        toast.success("¡Éxito!", {
-          description: data.message,
-        });
-        queryClient.invalidateQueries({ queryKey: ["inventoryProducts"] });
-        queryClient.invalidateQueries({ queryKey: ["dashboardProducts"] });
-      } else {
-        toast.error("Error", {
-          description: data.error || "Ocurrió un error desconocido.",
-        });
-      }
-    },
-    onError: (error) => {
-      setProductToDelete(null);
-      toast.error("Error de red", {
-        description: error.message,
-      });
-    },
-  });
+  const { deleteProduct, isDeleting } = useDeleteProduct();
 
+  const handleUpdateSuccess = () => {
+    setProductToEdit(null); // Cierra el Sheet
+    queryClient.invalidateQueries({ queryKey: ["inventoryProducts"] });
+    queryClient.invalidateQueries({ queryKey: ["dashboardProducts"] });
+  };
 
   if (isLoading && !initialProducts) return <InventorySkeleton />;
 
   if (isError) {
-    return (
+     return (
       <Alert variant="destructive">
         <Terminal className="h-4 w-4" />
         <AlertTitle>Error de Carga</AlertTitle>
@@ -87,11 +72,18 @@ const InventoryList = ({ initialProducts }: InventoryListProps) => {
           <ProductCard
             key={product.id}
             product={product}
-            onEdit={() => alert(`Editando: ${product.name}`)}
+            onEdit={() => setProductToEdit(product)}
             onDelete={() => setProductToDelete(product)}
           />
         ))}
       </div>
+
+      <EditProductSheet 
+        isOpen={!!productToEdit}
+        product={productToEdit}
+        onClose={() => setProductToEdit(null)}
+        onSuccess={handleUpdateSuccess}
+      />
 
       {productToDelete && (
         <DeleteConfirmationDialog
