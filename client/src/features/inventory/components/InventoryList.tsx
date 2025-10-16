@@ -11,6 +11,7 @@ import { useState } from "react";
 import { DeleteConfirmationDialog } from "./DeleteConfirmationDialog";
 import { InventorySkeleton } from "./InventorySkeleton";
 import { ProductCard } from "./ProductCard";
+import { toast } from "sonner"; 
 import { Product } from "@/types";
 
 
@@ -31,19 +32,27 @@ const InventoryList = ({ initialProducts }: InventoryListProps) => {
   const { mutate: deleteProduct, isPending: isDeleting } = useMutation({
     mutationFn: deleteProductAction,
     onSuccess: (data) => {
+      setProductToDelete(null);
       if (data.success) {
+        toast.success("¡Éxito!", {
+          description: data.message,
+        });
         queryClient.invalidateQueries({ queryKey: ["inventoryProducts"] });
         queryClient.invalidateQueries({ queryKey: ["dashboardProducts"] });
       } else {
-        alert(`Error: ${data.error || "Ocurrió un error desconocido."}`);
+        toast.error("Error", {
+          description: data.error || "Ocurrió un error desconocido.",
+        });
       }
-      setProductToDelete(null);
     },
     onError: (error) => {
-      alert(`Error al eliminar: ${error.message}`);
       setProductToDelete(null);
+      toast.error("Error de red", {
+        description: error.message,
+      });
     },
   });
+
 
   if (isLoading && !initialProducts) return <InventorySkeleton />;
 
@@ -58,7 +67,7 @@ const InventoryList = ({ initialProducts }: InventoryListProps) => {
       </Alert>
     );
   }
-
+  
   if (!products || products.length === 0) {
     return (
       <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm mt-8 py-12">
