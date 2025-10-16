@@ -3,13 +3,14 @@ import HeaderInventory from "@/features/inventory/components/Header";
 import InventoryList from "@/features/inventory/components/InventoryList";
 import React from "react";
 
+export const dynamic = "force-dynamic";
+
+
 const InventoryPage = async () => {
   let initialProducts;
   try {
-    // 1. Obtenemos los productos
     const productsFromDb = await getInventoryProductsAction();
 
-    // 2. Serializamos los datos para el cliente
     initialProducts = JSON.parse(JSON.stringify(productsFromDb));
 
   } catch {

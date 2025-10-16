@@ -4,6 +4,9 @@ import SectionsDashboard from "@/features/dashboard/components/Sections";
 import React from "react";
 import { productsDashboardType } from "@/types";
 
+export const dynamic = "force-dynamic";
+
+
 const DashboardPage = async () => {
   let initialProducts: productsDashboardType;
 
