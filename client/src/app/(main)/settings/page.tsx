@@ -1,9 +1,10 @@
+import { AccountSettings } from '@stackframe/stack'
 import React from 'react'
 
 const SettingsPage = () => {
   return (
-    <div>
-      SettingsPage
+    <div className='w-full'>
+      <AccountSettings fullPage />
     </div>
   )
 }
