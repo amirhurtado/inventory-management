@@ -1,12 +1,14 @@
 "use server";
 
+import { getCurrentUser } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 
-export const getDashboardProductAction = async (userId: string) => {
+export const getDashboardProductAction = async () => {
   try {
+    const user = await getCurrentUser();
     const products = await prisma.product.findMany({
       where: {
-        userId,
+        userId: user.id,
       },
       select: {
         name: true,
@@ -16,15 +18,37 @@ export const getDashboardProductAction = async (userId: string) => {
         createdAt: true,
       },
       orderBy: {
-        createdAt: "desc"
-      }
+        createdAt: "desc",
+      },
     });
 
-    return { success: true, products };
-  } catch {
-    return { success: false };
+    return products;
+  } catch (error) {
+    console.error("Error fetching dashboard products:", error);
+    throw new Error("No se pudieron obtener los productos del dashboard.");
   }
 };
+
+
+export const getInventoryProductsAction = async () => {
+  try {
+    const user = await getCurrentUser();
+    const products = await prisma.product.findMany({
+      where: {
+        userId: user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return products;
+  } catch (error) {
+    console.error("Error fetching inventory products:", error);
+    throw new Error("No se pudieron obtener los productos del inventario.");
+  }
+};
+
 
 
 
@@ -49,20 +73,3 @@ export const getRecentProductsAction = async (userId: string) => {
 
 
 
-export const getInventoryProductsAction = async (userId: string) => {
-  try {
-    const products = await prisma.product.findMany({
-      where: {
-        userId,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    return { success: true, products };
-  } catch (error) {
-    console.error(error);
-    return { success: false, error: "No se pudieron obtener los productos." };
-  }
-};
