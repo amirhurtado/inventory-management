@@ -6,7 +6,7 @@ Este proyecto es una aplicación web  para la gestión de inventario (CRUD), dis
 
 El sitio está desplegado en Vercel. Puedes verlo en acción aquí:
 
-[[**https://inventory-management-amir.vercel.app/**](https://inventory-management-amir.vercel.app/)]
+[**https://inventory-management-lilac-nine.vercel.app/**](https://inventory-management-lilac-nine.vercel.app/)
 
 ---
 
