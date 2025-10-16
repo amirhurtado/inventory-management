@@ -19,12 +19,12 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar className="max-h-dvh">
+    <Sidebar className="max-h-dvh ">
       <SidebarHeader className="mt-2 md:mt-4">
         <Image src="/logo.png" width={50} height={50} alt="logo" />
       </SidebarHeader>
       <SidebarContent className="max-h-dvh overflow-hidden">
-        <div className="flex flex-col justify-between h-dvh">
+        <div className="flex flex-col justify-between h-full">
           <SidebarGroup>
             <SidebarGroupLabel className="uppercase mt-2">
               <h2>Principal</h2>
