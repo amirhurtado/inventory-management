@@ -23,7 +23,7 @@ export function AppSidebar() {
       <SidebarHeader className="mt-2 md:mt-4">
         <Image src="/logo.png" width={50} height={50} alt="logo" />
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="max-h-dvh overflow-hidden">
         <div className="flex flex-col justify-between h-dvh">
           <SidebarGroup>
             <SidebarGroupLabel className="uppercase mt-2">
