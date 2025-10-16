@@ -19,7 +19,7 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <Sidebar>
+    <Sidebar className="max-h-dvh">
       <SidebarHeader className="mt-2 md:mt-4">
         <Image src="/logo.png" width={50} height={50} alt="logo" />
       </SidebarHeader>
